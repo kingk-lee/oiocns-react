@@ -1,8 +1,8 @@
 import { IWork, IWorkTask } from '@/ts/core';
 import React from 'react';
 import FullScreenModal from '@/components/Common/fullScreen';
-// import TaskStart from '@/executor/tools/task/start';
-import MultitabTable from '@/executor/tools/task//multitabTable'
+import TaskStart from '@/executor/tools/task/start';
+// import MultitabTable from '@/executor/tools/task//multitabTable';
 import { model } from '@/ts/base';
 // 卡片渲染
 interface IProps {
@@ -13,6 +13,7 @@ interface IProps {
 
 /** 办事-业务流程--发起 */
 const WorkStartDo: React.FC<IProps> = ({ current, finished, data }) => {
+  // const [activeKey, setActiveKey] = useState(0);
   return (
     <FullScreenModal
       open
@@ -24,8 +25,8 @@ const WorkStartDo: React.FC<IProps> = ({ current, finished, data }) => {
       title={'发起流程'}
       footer={[]}
       onCancel={finished}>
-      {/* <TaskStart current={current} finished={finished} data={data} /> */}
-      <MultitabTable />
+      <TaskStart current={current} finished={finished} data={data} />
+      {/* <MultitabTable current={current} finished={finished} data={data}/> */}
     </FullScreenModal>
   );
 };

@@ -23,6 +23,7 @@ const TaskStart: React.FC<IProps> = ({ current, data, finished }) => {
   const info: { content: string } = { content: '' };
 
   const loadGateway = (apply: IWorkApply) => {
+    console.log('apply', apply);
     const gatewayInfos = loadGatewayNodes(apply.instanceData.node, []);
     return (
       <>
@@ -63,6 +64,7 @@ const TaskStart: React.FC<IProps> = ({ current, data, finished }) => {
     );
   }
   if (apply) {
+    console.log('data', data);
     return (
       <>
         <WorkForm

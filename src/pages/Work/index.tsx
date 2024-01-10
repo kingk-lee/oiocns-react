@@ -95,6 +95,7 @@ const WorkContent: React.FC = () => {
   };
 
   const clickHanlder = (file: IFile | undefined, dblclick: boolean) => {
+    console.log('file===', file);
     if (dblclick) {
       clearHanlder();
       if (file) {
