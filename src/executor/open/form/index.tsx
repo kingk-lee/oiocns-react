@@ -26,6 +26,7 @@ const FormView: React.FC<IProps> = ({ form, finished }) => {
   const [select, setSelcet] = useState();
   const [loaded] = useAsyncLoad(() => form.loadContent());
   const dataRange = form.metadata.options?.dataRange;
+  console.log('dataRange',form)
   const FormBrower: React.FC = () => {
     const [, rootMenu, selectMenu, setSelectMenu] = useMenuUpdate(
       () => config.loadSpeciesItemMenu(form),
@@ -33,6 +34,7 @@ const FormView: React.FC<IProps> = ({ form, finished }) => {
     );
     if (!selectMenu || !rootMenu) return <></>;
     const loadContent = () => {
+      console.log('select', select);
       if (select) {
         return (
           <ThingView form={form} thingData={select} onBack={() => setSelcet(undefined)} />
@@ -62,11 +64,13 @@ const FormView: React.FC<IProps> = ({ form, finished }) => {
                   } else if (selectMenu.item?.code) {
                     loadOptions.userData.push(selectMenu.item.code);
                   }
+                  console.log('loadOptions', loadOptions);
                   const result = await kernel.loadThing(
                     form.belongId,
                     [form.belongId],
                     loadOptions,
                   );
+                  console.log('result', result);
                   return result;
                 }
                 return { data: [], success: true, totalCount: 0, groupCount: 0 };

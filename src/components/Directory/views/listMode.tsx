@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IDEntity } from '@/ts/core';
 import { Badge, Dropdown, List, MenuProps, Tag } from 'antd';
 import { showChatTime } from '@/utils/tools';

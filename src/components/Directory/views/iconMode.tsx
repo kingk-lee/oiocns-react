@@ -32,9 +32,11 @@ const IconMode = ({
         bordered={false}
         key={item.key}
         onClick={() => {
+          console.log('bbbb');
           fileOpen(item, false);
         }}
         onDoubleClick={() => {
+          console.log('aaaa');
           fileOpen(item, true);
         }}
         onContextMenu={(e) => {

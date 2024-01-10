@@ -35,6 +35,7 @@ const FileBrowser: React.FC = () => {
   };
 
   const clickHanlder = (file: ITarget | undefined, dblclick: boolean) => {
+    console.log('file', file);
     if (dblclick) {
       clearHanlder();
       if (file) {
@@ -53,6 +54,7 @@ const FileBrowser: React.FC = () => {
     } else {
       contents.push(...current.content());
     }
+    console.log('getContent', contents);
     return contents;
   };
 

@@ -70,6 +70,7 @@ const DirectoryView: React.FC<IProps> = (props) => {
   };
 
   const RenderListMode: React.FC<{ content: IDEntity[] }> = ({ content }) => {
+    console.log('content.length', content.length);
     if (content.length > 500) {
       return (
         <VListMode
