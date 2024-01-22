@@ -1,12 +1,12 @@
-import { IWork, IWorkTask } from '@/ts/core';
-import React, { useEffect, useState } from 'react';
+import { IWork } from '@/ts/core';
+import React, { useState } from 'react';
 import FullScreenModal from '@/components/Common/fullScreen';
 import MultitabTable from '@/executor/tools/task/multitabTable';
 import TaskStart from '@/executor/tools/task/start';
 import { model } from '@/ts/base';
 
 interface IProps {
-  current: IWork | IWorkTask;
+  current: IWork;
   finished: () => void;
   data?: model.InstanceDataModel;
 }
@@ -14,6 +14,9 @@ interface IProps {
 /** 办事-业务流程--发起 */
 const TabTable: React.FC<IProps> = ({ current, finished, data }) => {
   const [activeKey] = useState('1');
+  const rule = current.metadata.rule
+    ? JSON.parse(current.metadata.rule)
+    : { applyType: '默认' };
   const title = current.name;
   return (
     <FullScreenModal
@@ -26,7 +29,7 @@ const TabTable: React.FC<IProps> = ({ current, finished, data }) => {
       title={title}
       footer={[]}
       onCancel={finished}>
-      {current.metadata.applyType === '列表' ? (
+      {rule.applyType === '列表' ? (
         <MultitabTable
           current={current}
           finished={finished}

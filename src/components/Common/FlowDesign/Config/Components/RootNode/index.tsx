@@ -23,7 +23,11 @@ interface IProps {
  */
 
 const RootNode: React.FC<IProps> = (props) => {
+  const rule = props.work.metadata.rule
+    ? JSON.parse(props.work.metadata.rule)
+    : { applyType: '默认' };
   const [trigger, setTrigger] = useState<string>('before');
+  const [applyType, setApplyType] = useState<string>(rule.applyType || '默认');
   const [funcName, setFuncName] = useState<string>('');
   const [formModel, setFormModel] = useState<string>('');
   props.current.primaryForms = props.current.primaryForms || [];
@@ -42,6 +46,32 @@ const RootNode: React.FC<IProps> = (props) => {
   return (
     <div className={cls[`app-roval-node`]}>
       <div className={cls[`roval-node`]}>
+        <Card type="inner" title="打开类型" className={cls['card-info']} extra={<></>}>
+          {primaryForms && primaryForms.length > 0 && (
+            <span>
+              <SelectBox
+                showClearButton
+                value={applyType}
+                style={{ display: 'inline-block' }}
+                dataSource={[
+                  { text: '默认', value: '默认' },
+                  { text: '选择', value: '选择' },
+                  { text: '列表', value: '列表' },
+                ]}
+                displayExpr={'text'}
+                valueExpr={'value'}
+                onValueChange={(e) => {
+                  const rule = props.work.metadata.rule
+                    ? JSON.parse(props.work.metadata.rule)
+                    : { applyType: '默认' };
+                  rule.applyType = e;
+                  props.work.metadata.rule = JSON.stringify(rule);
+                  setApplyType(e);
+                }}
+              />
+            </span>
+          )}
+        </Card>
         <Card
           type="inner"
           title="主表配置"

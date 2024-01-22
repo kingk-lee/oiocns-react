@@ -35,9 +35,11 @@ const ApplicationModal: React.FC<IProps> = ({ current, finished }) => {
     };
     //数据结构转化
     const resource_ = convertNode(resource, validation);
+    const rule = JSON.parse(current.metadata.rule);
     if (validation.isPass) {
       current.metadata.rule = JSON.stringify({
         hasGateway: validation.hasGateway,
+        applyType: rule.applyType,
       });
       if (
         await current.update({
